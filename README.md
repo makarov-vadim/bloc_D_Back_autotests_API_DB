@@ -25,4 +25,4 @@
 
 ## Реализация
 
-### [1. Test-Suite WordPress](Test_Suite_WordPress/Test_Suite_WordPress.md)
+### [Test-Suite WordPress](Test_Suite_WordPress/Test_Suite_WordPress.md)
