@@ -1,34 +1,35 @@
-import pymysql
+import functools
 from typing import Any
 
+import pymysql
+
+
 class BaseDB:
+    """Класс, описывающий базовый набор действий с базой данных"""
     def __init__(self, connection_info: dict):
         self.connection_info = connection_info
 
-    def _select(self, sql, args=None) -> tuple | None:
-        with pymysql.connect(**self.connection_info) as conn:
-            with conn.cursor() as cur:
-                cur.execute(sql,args)
-                columns = [desc[0] for desc in cur.description]
-                result = cur.fetchone()
+        self._select_all = self._sql_request(self._select_all)
+        self._execute = self._sql_request(self._execute)
+
+    def _sql_request(self, func):
+        """Декоратор для работы с курсором библиотеки pymysql"""
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            with pymysql.connect(**self.connection_info) as connect:
+                with connect.cursor() as cursor:
+                    result = func(*args, cursor=cursor, **kwargs)
+            return result
+        return wrapper
+
+    def _select_all(self, sql, args=None, cursor=None) -> tuple:
+        """Метод, выполняющий SELECT-запрос в БД"""
+        cursor.execute(sql,args)
+        columns = [desc[0] for desc in cursor.description]
+        result = cursor.fetchall()
         return columns, result
 
-    def _select_all(self, sql, args=None) -> tuple:
-        with pymysql.connect(**self.connection_info) as conn:
-            with conn.cursor() as cur:
-                cur.execute(sql,args)
-                columns = [desc[0] for desc in cur.description]
-                result = cur.fetchall()
-        return columns, result
-
-    def _execute(self, sql, args=None) -> Any:
-        with pymysql.connect(**self.connection_info) as conn:
-            with conn.cursor() as cur:
-                cur.execute(sql, args)
-                return cur.lastrowid
-
-    def _execute_many(self, sql, args=None) -> Any:
-        with pymysql.connect(**self.connection_info) as conn:
-            with conn.cursor() as cur:
-                return cur.executemany(sql, args)
-
+    def _execute(self, sql, args=None, cursor=None) -> Any:
+        """Метод, выполняющий запрос в БД"""
+        cursor.execute(sql, args)
+        return cursor.lastrowid

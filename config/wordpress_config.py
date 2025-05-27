@@ -1,9 +1,16 @@
+import os
+
+from dotenv import load_dotenv
+
+
 class WordPressBDConfig:
     """Класс, описывающий параметры соединения с БД WordPress"""
-    HOST = "localhost"
-    PORT = 3306
-    USER = "wordpress"
-    PASSWORD = "wordpress"
+    load_dotenv()
+    HOST = os.environ.get("HOST")
+    PORT = int(os.environ.get("PORT"))
+    USER = os.environ.get("USER")
+    PASSWORD = os.environ.get("PASSWORD")
+
     DB = "wordpress"
     AUTOCOMMIT = True
 

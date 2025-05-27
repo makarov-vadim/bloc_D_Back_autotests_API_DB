@@ -1,4 +1,4 @@
-from helpers.models import PostModel, CategoryModel, TagModel, UserModel
+from models.models import CategoryModel, PostModel, TagModel, UserModel
 
 
 def get_post(post_data: dict) -> PostModel:
