@@ -42,16 +42,3 @@ class WordPressDB(BaseDB):
 
         self._delete_object(WordPressBDConfig.TABLE_WP_TERM_TAXONOMY, term_taxonomy_id, obj_id_name="term_taxonomy_id")
         self._delete_object(WordPressBDConfig.TABLE_WP_TERMS, term_id, obj_id_name="term_id")
-
-    # # Отчистка БД перед тестом и после теста
-    # @allure.step("Отчистка БД перед тестом и после теста")
-    # def delete_all_data(self):
-    #     """Отчистка БД перед тестом и после теста"""
-    #     sql_queries = [
-    #         SQLQueries.delete_all_query(WordPressBDConfig.TABLE_WP_POSTS),
-    #         SQLQueries.delete_all_query(WordPressBDConfig.TABLE_WP_TERMS),
-    #         SQLQueries.delete_all_query(WordPressBDConfig.TABLE_WP_TERM_TAXONOMY),
-    #         SQLQueries.delete_users_query()
-    #     ]
-    #     results = [self._execute(sql_query) for sql_query in sql_queries]
-    #     return results

@@ -1,3 +1,5 @@
+import logging
+
 import pytest
 from faker import Faker
 
@@ -56,43 +58,59 @@ def fake():
 @pytest.fixture(scope="function")
 def new_post_data(fake):
     post_content = fake.text()
-    yield {
+    new_post_data = {
             "title": f"{post_content[0:8]}...",
             "content": post_content,
             "status": "publish"
         }
+    logging.info(f"Тестовые данные для новой записи: {new_post_data}")
+    yield new_post_data
 
 @pytest.fixture(scope="function")
 def updated_post_data(fake):
-    yield {"content": fake.text()}
+    updated_post_data = {"content": fake.text()}
+    logging.info(f"Тестовые данные для обновления записи: {updated_post_data}")
+    yield updated_post_data
 
 @pytest.fixture(scope="function")
 def new_category_data(fake):
-    yield {"name": fake.job()}
+    new_category_data = {"name": fake.job()}
+    logging.info(f"Тестовые данные для новой рубрики: {new_category_data}")
+    yield new_category_data
 
 @pytest.fixture(scope="function")
 def updated_category_data(fake):
-    yield {"name": fake.job()}
+    updated_category_data = {"name": fake.job()}
+    logging.info(f"Тестовые данные для обновления рубрики: {updated_category_data}")
+    yield updated_category_data
 
 @pytest.fixture(scope="function")
 def new_tag_data(fake):
-    yield {"name": fake.company()}
+    new_tag_data = {"name": fake.company()}
+    logging.info(f"Тестовые данные для новой метки: {new_tag_data}")
+    yield new_tag_data
 
 @pytest.fixture(scope="function")
 def updated_tag_data(fake):
-    yield {"name": fake.company()}
+    updated_tag_data = {"name": fake.company()}
+    logging.info(f"Тестовые данные для обновления метки: {updated_tag_data}")
+    yield updated_tag_data
 
 @pytest.fixture(scope="function")
 def new_user_data(fake):
-    yield {
+    new_user_data = {
         "username": fake.user_name(),
         "email": fake.email(),
         "password": f"{fake.password()}"
     }
+    logging.info(f"Тестовые данные для нового пользователя: {new_user_data}")
+    yield new_user_data
 
 @pytest.fixture(scope="function")
 def updated_user_data(fake):
-    yield {"email": fake.email()}
+    updated_user_data = {"email": fake.email()}
+    logging.info(f"Тестовые данные для обновления пользователя: {updated_user_data}")
+    yield updated_user_data
 
 
 # Фикстуры сущностей как моделей

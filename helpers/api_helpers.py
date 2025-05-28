@@ -30,8 +30,10 @@ def get_post_from_db(sql_response: dict | None) -> PostModel | None:
     }
     return get_post(post_data)
 
-def get_post_from_api(api_response: dict) -> PostModel:
+def get_post_from_api(api_response: dict) -> PostModel | None:
     """Функция, возвращающая модель записи, считанную из ответа на REST-запрос"""
+    if "deleted" in api_response and api_response['deleted']:
+        return None
     post_data = {
         "id": api_response["id"],
         "title": api_response["title"]["raw"],
@@ -39,7 +41,6 @@ def get_post_from_api(api_response: dict) -> PostModel:
         "status": api_response["status"]
     }
     return get_post(post_data)
-
 
 def get_category_from_db(sql_response: dict | None) -> CategoryModel | None:
     """Функция, возвращающая модель рубрики, считанную из БД"""
@@ -52,16 +53,16 @@ def get_category_from_db(sql_response: dict | None) -> CategoryModel | None:
     }
     return get_category(category_data)
 
-
-def get_category_from_api(api_response: dict) -> CategoryModel:
+def get_category_from_api(api_response: dict) -> CategoryModel | None:
     """Функция, возвращающая модель рубрики, считанную из ответа на REST-запрос"""
+    if "deleted" in api_response and api_response['deleted']:
+        return None
     category_data = {
         "id": api_response["id"],
         "name": api_response["name"],
         "taxonomy": api_response["taxonomy"],
     }
     return get_category(category_data)
-
 
 def get_tag_from_bd(sql_response: dict | None) -> TagModel | None:
     """Функция, возвращающая модель метки, считанную из БД"""
@@ -74,8 +75,10 @@ def get_tag_from_bd(sql_response: dict | None) -> TagModel | None:
     }
     return get_tag(tag_data)
 
-def get_tag_from_api(api_response: dict) -> TagModel:
+def get_tag_from_api(api_response: dict) -> TagModel | None:
     """Функция, возвращающая модель метки, считанную из ответа на REST-запрос"""
+    if "deleted" in api_response and api_response['deleted']:
+        return None
     tag_data = {
         "id": api_response["id"],
         "name": api_response["name"],
@@ -94,8 +97,10 @@ def get_user_from_bd(sql_response: dict | None) -> UserModel | None:
     }
     return get_user(user_data)
 
-def get_user_from_api(api_response: dict) -> UserModel:
+def get_user_from_api(api_response: dict) -> UserModel | None:
     """Функция, возвращающая модель метки, считанную из ответа на REST-запрос"""
+    if "deleted" in api_response and api_response['deleted']:
+        return None
     user_data = {
         "id": api_response["id"],
         "username": api_response["username"],
