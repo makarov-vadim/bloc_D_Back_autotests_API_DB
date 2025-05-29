@@ -16,6 +16,12 @@ class PostsApi(WordPressApi):
         response_body = self.create_object(WordPressURLS.POSTS_CREATE_URL, post.model_dump())
         return get_post_from_api(response_body)
 
+    @allure.step("Получение записи")
+    def retrieve_post(self, post_id: int) -> PostModel:
+        logging.info(f"Получение записи с id {post_id}")
+        response_body = self.get_object(WordPressURLS.POSTS_GET_URL, post_id)
+        return get_post_from_api(response_body)
+
     @allure.step("Обновление записи")
     def update_post(self, post_id: int, data: dict) -> PostModel | None:
         logging.info(f"Обновление записи с id {post_id} и обновляемыми параметрами {data}")

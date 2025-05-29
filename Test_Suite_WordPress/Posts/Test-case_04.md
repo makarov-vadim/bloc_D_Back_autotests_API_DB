@@ -1,7 +1,7 @@
-# Тест-кейс 02. Получение записи
+# Тест-кейс 04. Удаление записи
 
 ## Описание
-Позитивный тест на получение записи по ее id.
+Позитивный тест на удаление записи.
 
 ## Автор: Макаров Вадим Михайлович
 
@@ -10,13 +10,14 @@
 [документации](https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/#basic-authentication-with-application-passwords)
 с параметрами USERNAME и PASSWORD, Роль - Администратор (далее - Параметры аутентификации)
 2) Доступна для чтения таблица wp_posts из базы данных wordpress (далее - БД)
-3) В БД существует запись с параметрами: id = {id}; post_title = "The title for the post"; post_content = "The content for the post", post_status = "publish"
+3) В БД существует запись с id = {id}
 
 
 ## Шаги
-Выполнить GET-запрос http://localhost:8000/index.php?rest_route=/wp/v2/posts/{id} , используя Параметры аутентификации
+Выполнить DELETE-запрос http://localhost:8000/index.php?rest_route=/wp/v2/posts/{id} , используя Параметры аутентификации
 
 
 ## Ожидаемый результат
 1) Получен статус-код ответа 200 OK
-2) Тело ответа содержит параметры: id = {id}; title = "The title for the post"; content = "The content for the post", status = "publish"
+2) Тело ответа содержит id = {id}
+3) В БД не существует записи c id = {id}

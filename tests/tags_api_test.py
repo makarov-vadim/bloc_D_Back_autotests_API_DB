@@ -8,7 +8,7 @@ from helpers.t_data import TData
 @allure.epic("WordPress_API_Tests")
 class TestsTagsApi:
     """Класс, описывающий автотест точки доступа Tags сервиса WordPress"""
-    @allure.id("7")
+    @allure.id("9")
     @allure.title("Создание метки")
     def test_create_tag(self, tag, tags_service, tags_db):
         tag_from_api = tags_service.create_tag(tag)
@@ -18,7 +18,16 @@ class TestsTagsApi:
         tags_db.delete_tag(tag_from_db.id)
 
 
-    @allure.id("8")
+    @allure.id("10")
+    @allure.title("Получение метки")
+    def test_retrieve_tag(self, tags_service, tags_db, tag_id):
+        tag_from_db = tags_db.get_tag(tag_id)
+        tag_from_api = tags_service.retrieve_tag(tag_id)
+
+        assert tag_from_api == tag_from_db, "Полученная метка не совпадает с меткой в БД"
+
+
+    @allure.id("11")
     @allure.title("Изменение метки")
     def test_update_tag(self, tags_service, updated_tag_data, tags_db, tag_id):
         tag_from_db_1 = tags_db.get_tag(tag_id)
@@ -28,7 +37,7 @@ class TestsTagsApi:
         assert tag_from_api != tag_from_db_1 and tag_from_api == tag_from_db_2, "Метка не обновлена POST-запросом"
 
 
-    @allure.id("9")
+    @allure.id("12")
     @allure.title("Удаление метки")
     def test_delete_tag(self, tags_service, tags_db, tag_id):
         tag_from_db_1 = tags_db.get_tag(tag_id)

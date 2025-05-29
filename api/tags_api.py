@@ -16,6 +16,12 @@ class TagsApi(WordPressApi):
         response_body = self.create_object(WordPressURLS.TAGS_CREATE_URL, tag.model_dump())
         return get_tag_from_api(response_body)
 
+    @allure.step("Получение метки")
+    def retrieve_tag(self, post_id: int) -> TagModel:
+        logging.info(f"Получение метки с id {post_id}")
+        response_body = self.get_object(WordPressURLS.TAGS_GET_URL, post_id)
+        return get_tag_from_api(response_body)
+
     @allure.step("Обновление метки")
     def update_tag(self, tag_id: int, data: dict) -> TagModel | None:
         logging.info(f"Обновление метки с id {tag_id} и обновляемыми параметрами {data}")

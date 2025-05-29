@@ -58,8 +58,9 @@ def fake():
 @pytest.fixture(scope="function")
 def new_post_data(fake):
     post_content = fake.text()
+    post_title = fake.name()
     new_post_data = {
-            "title": f"{post_content[0:8]}...",
+            "title": post_title,
             "content": post_content,
             "status": "publish"
         }

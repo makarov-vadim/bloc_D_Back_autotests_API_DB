@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+
 from models.models import CategoryModel, PostModel, TagModel, UserModel
 
 
@@ -36,8 +38,8 @@ def get_post_from_api(api_response: dict) -> PostModel | None:
         return None
     post_data = {
         "id": api_response["id"],
-        "title": api_response["title"]["raw"],
-        "content": api_response["content"]["raw"],
+        "title": BeautifulSoup(api_response["title"]["rendered"], features="html.parser").text.strip(),
+        "content": BeautifulSoup(api_response["content"]["rendered"], features="html.parser").text.strip(),
         "status": api_response["status"]
     }
     return get_post(post_data)
@@ -104,6 +106,6 @@ def get_user_from_api(api_response: dict) -> UserModel | None:
     user_data = {
         "id": api_response["id"],
         "username": api_response["username"],
-        "email": api_response["email"]
+        "email": api_response.get("email", None)
     }
     return get_user(user_data)

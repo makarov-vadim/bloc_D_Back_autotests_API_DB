@@ -16,6 +16,12 @@ class UsersApi(WordPressApi):
         response_body = self.create_object(WordPressURLS.USERS_CREATE_URL, user.model_dump())
         return get_user_from_api(response_body)
 
+    @allure.step("Получение пользователя")
+    def retrieve_user(self, user_id: int) -> UserModel:
+        logging.info(f"Получение пользователя с id {user_id}")
+        response_body = self.get_object(WordPressURLS.USERS_GET_URL, user_id, data={"context": "edit"})
+        return get_user_from_api(response_body)
+
     @allure.step("Обновление пользователя")
     def update_user(self, user_id: int, data: dict) -> UserModel | None:
         logging.info(f"Обновление пользователя с id {user_id} и обновляемыми параметрами {data}")
