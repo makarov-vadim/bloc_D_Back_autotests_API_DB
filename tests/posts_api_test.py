@@ -11,7 +11,6 @@ class TestsPostsApi:
     @allure.id("1")
     @allure.title("Создание записи")
     def test_create_post(self, post, posts_service, posts_db):
-        """Тест-кейс 01. Тестирование POST-запроса на создание записи"""
         post_from_api = posts_service.create_post(post)
         post_from_db = posts_db.get_post(post_from_api.id)
 
@@ -22,7 +21,6 @@ class TestsPostsApi:
     @allure.id("2")
     @allure.title("Изменение записи")
     def test_update_post(self, posts_service, updated_post_data, posts_db, post_id):
-        """Тест-кейс 02. Тестирование POST-запроса на изменение записи"""
         post_from_db_1 = posts_db.get_post(post_id)
         post_from_api = posts_service.update_post(post_id, updated_post_data)
         post_from_db_2 = posts_db.get_post(post_id)
@@ -33,7 +31,6 @@ class TestsPostsApi:
     @allure.id("3")
     @allure.title("Удаление записи")
     def test_delete_post(self, posts_service, posts_db, post_id):
-        """Тест-кейс 03. Тестирование DELETE-запроса на удаление записи"""
         post_from_db_1 = posts_db.get_post(post_id)
         post_from_api = posts_service.delete_post(post_id, TData.DELETE_DATA)
         post_from_db_2 = posts_db.get_post(post_id)

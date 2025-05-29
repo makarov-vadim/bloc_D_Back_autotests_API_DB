@@ -14,7 +14,6 @@ class PostsDB(WordPressDB):
     """Класс, описывающий создание, получение и удаление записей в базе данных WordPressDB"""
     @allure.step("Создание записи в БД с помощью SQL-запроса")
     def create_post(self, post: PostModel) -> int:
-        """Создание записи в БД с помощью SQL-запроса"""
         logging.info(f"Создание записи {post} в БД с помощью SQL-запроса")
 
         sql_query = SQLQueries.create_post_query(post.title, post.content, post.status)
@@ -23,7 +22,6 @@ class PostsDB(WordPressDB):
 
     @allure.step("Получение записи из БД с помощью SQL-запроса")
     def get_post(self, post_id: int) -> PostModel | None:
-        """Получение записи из БД с помощью SQL-запроса"""
         logging.info(f"Получение записи с id {post_id} из БД с помощью SQL-запроса")
 
         sql_query = SQLQueries.get_post_query(post_id)
@@ -36,6 +34,5 @@ class PostsDB(WordPressDB):
 
     @allure.step("Удаление записи из БД с помощью SQL-запроса")
     def delete_post(self, post_id) -> Any:
-        """Удаление записи из БД с помощью SQL-запроса"""
         logging.info(f"Удаление записи с id {post_id} из БД с помощью SQL-запроса")
         return self._delete_object(WordPressBDConfig.TABLE_WP_POSTS, post_id)

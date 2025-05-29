@@ -11,7 +11,6 @@ class TestsUsersApi:
     @allure.id("10")
     @allure.title("Создание пользователя")
     def test_create_user(self, user, users_service, users_db):
-        """Тест-кейс 10. Тестирование POST-запроса на создание пользователя"""
         user_from_api = users_service.create_user(user)
         user_from_db = users_db.get_user(user_from_api.id)
 
@@ -22,7 +21,6 @@ class TestsUsersApi:
     @allure.id("11")
     @allure.title("Изменение пользователя")
     def test_update_user(self, users_service, updated_user_data, users_db, user_id):
-        """Тест-кейс 11. Тестирование POST-запроса на изменение пользователя"""
         user_from_db_1 = users_db.get_user(user_id)
         user_from_api = users_service.update_user(user_id, updated_user_data)
         user_from_db_2 = users_db.get_user(user_id)
@@ -33,7 +31,6 @@ class TestsUsersApi:
     @allure.id("12")
     @allure.title("Удаление пользователя")
     def test_delete_user(self, users_service, users_db, user_id):
-        """Тест-кейс 12. Тестирование DELETE-запроса на удаление пользователя"""
         user_from_db_1 = users_db.get_user(user_id)
         user_from_api = users_service.delete_user(user_id, TData.DELETE_USER_DATA)
         user_from_db_2 = users_db.get_user(user_id)

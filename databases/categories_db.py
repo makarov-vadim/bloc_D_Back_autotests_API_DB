@@ -12,7 +12,6 @@ class CategoriesDB(WordPressDB):
     """Класс, описывающий создание, получение и удаление рубрик в базе данных WordPressDB"""
     @allure.step("Создание рубрики в БД с помощью SQL-запроса")
     def create_category(self, category: CategoryModel) -> int:
-        """Создание рубрики в БД с помощью SQL-запроса"""
         logging.info(f"Создание рубрики {category} в БД с помощью SQL-запроса")
 
         sql_query_1 = SQLQueries.create_term_query(category.name)
@@ -24,7 +23,6 @@ class CategoriesDB(WordPressDB):
 
     @allure.step("Получение рубрики из БД с помощью SQL-запроса")
     def get_category(self, term_taxonomy_id: int) -> CategoryModel | None:
-        """Получение рубрики из БД с помощью SQL-запроса"""
         logging.info(f"Получение рубрики с id {term_taxonomy_id} из БД с помощью SQL-запроса")
 
         response = self._get_term_taxonomy(term_taxonomy_id, "category")
@@ -36,6 +34,5 @@ class CategoriesDB(WordPressDB):
 
     @allure.step("Удаление рубрики из БД с помощью SQL-запроса")
     def delete_category(self, term_taxonomy_id: int) -> None:
-        """Удаление рубрики из БД с помощью SQL-запроса"""
         logging.info(f"Удаление рубрики с id {term_taxonomy_id} из БД с помощью SQL-запроса")
         return self._delete_term_taxonomy(term_taxonomy_id, "category")

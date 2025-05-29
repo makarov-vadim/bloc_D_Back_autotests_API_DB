@@ -12,7 +12,6 @@ class TagsDB(WordPressDB):
     """Класс, описывающий создание, получение и удаление меток в базе данных WordPressDB"""
     @allure.step("Создание метки в БД с помощью SQL-запроса")
     def create_tag(self, tag: TagModel) -> int:
-        """Создание метки в БД с помощью SQL-запроса"""
         logging.info(f"Создание метки {tag} в БД с помощью SQL-запроса")
 
         sql_query_1 = SQLQueries.create_term_query(tag.name)
@@ -24,7 +23,6 @@ class TagsDB(WordPressDB):
 
     @allure.step("Получение метки из БД с помощью SQL-запроса")
     def get_tag(self, term_taxonomy_id: int) -> TagModel | None:
-        """Получение метки из БД с помощью SQL-запроса"""
         logging.info(f"Получение метки с id {term_taxonomy_id} из БД с помощью SQL-запроса")
 
         response = self._get_term_taxonomy(term_taxonomy_id, "post_tag")
@@ -36,6 +34,5 @@ class TagsDB(WordPressDB):
 
     @allure.step("Удаление метки из БД с помощью SQL-запроса")
     def delete_tag(self, term_taxonomy_id: int) -> None:
-        """Удаление метки из БД с помощью SQL-запроса"""
         logging.info(f"Удаление метки с id {term_taxonomy_id} из БД с помощью SQL-запроса")
         return self._delete_term_taxonomy(term_taxonomy_id, "post_tag")

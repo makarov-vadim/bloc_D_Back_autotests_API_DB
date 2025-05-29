@@ -11,7 +11,6 @@ class TestsCategoriesApi:
     @allure.id("4")
     @allure.title("Создание рубрики")
     def test_create_category(self, category, categories_service, categories_db):
-        """Тест-кейс 04. Тестирование POST-запроса на создание рубрики"""
         category_from_api = categories_service.create_category(category)
         category_from_db = categories_db.get_category(category_from_api.id)
 
@@ -22,7 +21,6 @@ class TestsCategoriesApi:
     @allure.id("5")
     @allure.title("Изменение рубрики")
     def test_update_category(self, categories_service, updated_category_data, categories_db, category_id):
-        """Тест-кейс 05. Тестирование POST-запроса на изменение рубрики"""
         category_from_db_1 = categories_db.get_category(category_id)
         category_from_api = categories_service.update_category(category_id, updated_category_data)
         category_from_db_2 = categories_db.get_category(category_id)
@@ -33,7 +31,6 @@ class TestsCategoriesApi:
     @allure.id("6")
     @allure.title("Удаление рубрики")
     def test_delete_category(self, categories_service, categories_db, category_id):
-        """Тест-кейс 06. Тестирование DELETE-запроса на удаление рубрики"""
         category_from_db_1 = categories_db.get_category(category_id)
         category_from_api = categories_service.delete_category(category_id, TData.DELETE_DATA)
         category_from_db_2 = categories_db.get_category(category_id)
