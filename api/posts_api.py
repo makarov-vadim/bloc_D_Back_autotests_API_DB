@@ -5,6 +5,7 @@ import allure
 from api.wordpress_api import WordPressApi
 from config.wordpress_config import WordPressURLS
 from helpers.api_helpers import get_post_from_api
+from helpers.t_data import TData
 from models.models import PostModel
 
 
@@ -19,7 +20,7 @@ class PostsApi(WordPressApi):
     @allure.step("Получение записи")
     def retrieve_post(self, post_id: int) -> PostModel:
         logging.info(f"Получение записи с id {post_id}")
-        response_body = self.get_object(WordPressURLS.POSTS_GET_URL, post_id)
+        response_body = self.get_object(WordPressURLS.POSTS_GET_URL, post_id, TData.GET_CONTEXT_DATA)
         return get_post_from_api(response_body)
 
     @allure.step("Обновление записи")
