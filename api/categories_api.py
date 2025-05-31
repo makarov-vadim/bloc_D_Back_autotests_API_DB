@@ -17,7 +17,7 @@ class CategoriesApi(WordPressApi):
         return get_category_from_api(response_body)
 
     @allure.step("Получение рубрики")
-    def retrieve_category(self, category_id: int) -> CategoryModel:
+    def get_category(self, category_id: int) -> CategoryModel:
         logging.info(f"Получение рубрики с id {category_id}")
         response_body = self.get_object(WordPressURLS.CATEGORIES_GET_URL, category_id)
         return get_category_from_api(response_body)

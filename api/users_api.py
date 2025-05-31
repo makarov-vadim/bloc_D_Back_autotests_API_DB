@@ -18,7 +18,7 @@ class UsersApi(WordPressApi):
         return get_user_from_api(response_body)
 
     @allure.step("Получение пользователя")
-    def retrieve_user(self, user_id: int) -> UserModel:
+    def get_user(self, user_id: int) -> UserModel:
         logging.info(f"Получение пользователя с id {user_id}")
         response_body = self.get_object(WordPressURLS.USERS_GET_URL, user_id, TData.GET_CONTEXT_DATA)
         return get_user_from_api(response_body)

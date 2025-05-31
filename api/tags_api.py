@@ -17,7 +17,7 @@ class TagsApi(WordPressApi):
         return get_tag_from_api(response_body)
 
     @allure.step("Получение метки")
-    def retrieve_tag(self, post_id: int) -> TagModel:
+    def get_tag(self, post_id: int) -> TagModel:
         logging.info(f"Получение метки с id {post_id}")
         response_body = self.get_object(WordPressURLS.TAGS_GET_URL, post_id)
         return get_tag_from_api(response_body)

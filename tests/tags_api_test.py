@@ -20,9 +20,9 @@ class TestsTagsApi:
 
     @allure.id("10")
     @allure.title("Получение метки")
-    def test_retrieve_tag(self, tags_service, tags_db, tag_id):
+    def test_get_tag(self, tags_service, tags_db, tag_id):
         tag_from_db = tags_db.get_tag(tag_id)
-        tag_from_api = tags_service.retrieve_tag(tag_id)
+        tag_from_api = tags_service.get_tag(tag_id)
 
         assert tag_from_api == tag_from_db, "Полученная метка не совпадает с меткой в БД"
 

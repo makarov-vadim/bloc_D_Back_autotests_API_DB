@@ -20,9 +20,9 @@ class TestsCategoriesApi:
 
     @allure.id("6")
     @allure.title("Получение рубрики")
-    def test_retrieve_category(self, categories_service, categories_db, category_id):
+    def test_get_category(self, categories_service, categories_db, category_id):
         category_from_db = categories_db.get_category(category_id)
-        category_from_api = categories_service.retrieve_category(category_id)
+        category_from_api = categories_service.get_category(category_id)
 
         assert category_from_api == category_from_db, "Полученная рубрика не совпадает с рубрикой в БД"
 

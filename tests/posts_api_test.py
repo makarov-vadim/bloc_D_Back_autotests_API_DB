@@ -20,9 +20,9 @@ class TestsPostsApi:
 
     @allure.id("2")
     @allure.title("Получение записи")
-    def test_retrieve_post(self, posts_service, posts_db, post_id):
+    def test_get_post(self, posts_service, posts_db, post_id):
         post_from_db = posts_db.get_post(post_id)
-        post_from_api = posts_service.retrieve_post(post_id)
+        post_from_api = posts_service.get_post(post_id)
 
         assert post_from_api == post_from_db, "Полученная запись не совпадает с записью в БД"
 

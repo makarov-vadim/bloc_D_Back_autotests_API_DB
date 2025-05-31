@@ -18,7 +18,7 @@ class PostsApi(WordPressApi):
         return get_post_from_api(response_body)
 
     @allure.step("Получение записи")
-    def retrieve_post(self, post_id: int) -> PostModel:
+    def get_post(self, post_id: int) -> PostModel:
         logging.info(f"Получение записи с id {post_id}")
         response_body = self.get_object(WordPressURLS.POSTS_GET_URL, post_id, TData.GET_CONTEXT_DATA)
         return get_post_from_api(response_body)
