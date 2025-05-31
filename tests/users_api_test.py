@@ -20,11 +20,10 @@ class TestsUsersApi:
 
     @allure.id("14")
     @allure.title("Получение пользователя")
-    def test_get_user(self, users_service, users_db, user_id):
-        user_from_db = users_db.get_user(user_id)
+    def test_get_user(self, users_service, user, user_id):
         user_from_api = users_service.get_user(user_id)
 
-        assert user_from_api == user_from_db, "Полученный пользователь не совпадает с пользователем в БД"
+        assert user_from_api == user, "Пользователь, полученный из GET-запроса не соответствует сгенерированному"
 
 
     @allure.id("15")

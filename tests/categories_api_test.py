@@ -20,11 +20,10 @@ class TestsCategoriesApi:
 
     @allure.id("6")
     @allure.title("Получение рубрики")
-    def test_get_category(self, categories_service, categories_db, category_id):
-        category_from_db = categories_db.get_category(category_id)
+    def test_get_category(self, categories_service, category, category_id):
         category_from_api = categories_service.get_category(category_id)
 
-        assert category_from_api == category_from_db, "Полученная рубрика не совпадает с рубрикой в БД"
+        assert category_from_api == category, "Рубрика, полученная из GET-запроса не соответствует сгенерированной"
 
 
     @allure.id("7")
