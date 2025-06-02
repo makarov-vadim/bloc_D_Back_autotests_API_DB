@@ -12,9 +12,9 @@ class WordPressApi(BaseApi):
         """Метод, создающий сущность на сервисе"""
         return self._request_post(expected_status_code = 201, auth=self.auth_info, url=url, json=data)
 
-    def get_object(self, url: str, object_id: int) -> dict:
+    def get_object(self, url: str, object_id: int, data: dict = {}) -> dict:
         """Метод, получающий сущность из сервиса"""
-        return self._request_get(auth=self.auth_info, url=f"{url}{object_id}")
+        return self._request_get(auth=self.auth_info, url=f"{url}{object_id}", json=data)
 
     def get_all_objects(self, url: str) -> dict:
         """Метод, получающий все сущности из сервиса"""

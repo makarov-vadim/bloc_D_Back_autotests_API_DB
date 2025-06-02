@@ -19,6 +19,14 @@ class TestsPostsApi:
 
 
     @allure.id("2")
+    @allure.title("Получение записи")
+    def test_get_post(self, posts_service, post, post_id):
+        post_from_api = posts_service.get_post(post_id)
+
+        assert post_from_api == post, "Запись, полученная из GET-запроса не соответствует сгенерированной"
+
+
+    @allure.id("3")
     @allure.title("Изменение записи")
     def test_update_post(self, posts_service, updated_post_data, posts_db, post_id):
         post_from_db_1 = posts_db.get_post(post_id)
@@ -28,7 +36,7 @@ class TestsPostsApi:
         assert post_from_api != post_from_db_1 and post_from_api == post_from_db_2, "Запись не обновлена POST-запросом"
 
 
-    @allure.id("3")
+    @allure.id("4")
     @allure.title("Удаление записи")
     def test_delete_post(self, posts_service, posts_db, post_id):
         post_from_db_1 = posts_db.get_post(post_id)

@@ -16,6 +16,12 @@ class CategoriesApi(WordPressApi):
         response_body = self.create_object(WordPressURLS.CATEGORIES_CREATE_URL, category.model_dump())
         return get_category_from_api(response_body)
 
+    @allure.step("Получение рубрики")
+    def get_category(self, category_id: int) -> CategoryModel:
+        logging.info(f"Получение рубрики с id {category_id}")
+        response_body = self.get_object(WordPressURLS.CATEGORIES_GET_URL, category_id)
+        return get_category_from_api(response_body)
+
     @allure.step("Обновление рубрики")
     def update_category(self, category_id: int, data: dict) -> CategoryModel | None:
         logging.info(f"Обновление рубрики с id {category_id} и обновляемыми параметрами {data}")

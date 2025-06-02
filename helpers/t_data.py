@@ -23,3 +23,4 @@ class TData:
 
     DELETE_DATA = {"force": True}
     DELETE_USER_DATA = {"force": True, "reassign": 1}
+    GET_CONTEXT_DATA = {"context": "edit"}

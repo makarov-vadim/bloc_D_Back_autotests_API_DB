@@ -5,6 +5,7 @@ import allure
 from api.wordpress_api import WordPressApi
 from config.wordpress_config import WordPressURLS
 from helpers.api_helpers import get_user_from_api
+from helpers.t_data import TData
 from models.models import UserModel
 
 
@@ -14,6 +15,12 @@ class UsersApi(WordPressApi):
     def create_user(self, user: UserModel) -> UserModel:
         logging.info(f"Создание пользователя {user}")
         response_body = self.create_object(WordPressURLS.USERS_CREATE_URL, user.model_dump())
+        return get_user_from_api(response_body)
+
+    @allure.step("Получение пользователя")
+    def get_user(self, user_id: int) -> UserModel:
+        logging.info(f"Получение пользователя с id {user_id}")
+        response_body = self.get_object(WordPressURLS.USERS_GET_URL, user_id, TData.GET_CONTEXT_DATA)
         return get_user_from_api(response_body)
 
     @allure.step("Обновление пользователя")
